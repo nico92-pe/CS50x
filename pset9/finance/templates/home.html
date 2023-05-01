@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Log In
+{% endblock %}
+
+{% block main %}
+
+<main class="container py-5 text-center">
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="text-start">Symbol</th>
+                <th class="text-start">Name</th>
+                <th class="text-end">Shares</th>
+                <th class="text-end">Price</th>
+                <th class="text-end">TOTAL</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% set count = namespace(value=0) %}
+            {% for trade in trades %}
+                <tr>
+                    <td class="text-start">{{ trades[count.value]["symbol"] }}</td>
+                    <td class="text-start">{{ trades[count.value]["name"] }}</td>
+                    <td class="text-end">{{ trades[count.value]["shares"] }}</td>
+                    <td class="text-end">{{ trades[count.value]["price"] | usd }}</td>
+                    <td class="text-end">${{ trades[count.value]["total"] | usd }}</td>
+                </tr>
+                {% set count.value = count.value + 1 %}
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td class="border-0 fw-bold text-end" colspan="4">Cash</td>
+                <td class="border-0 text-end">{{ cash | usd }}</td>
+            </tr>
+            <tr>
+                <td class="border-0 fw-bold text-end" colspan="4">TOTAL</td>
+                <td class="border-0 w-bold text-end">{{ total | usd }}</td>
+            </tr>
+        </tfoot>
+    </table>
+
+</main>
+
+{% endblock %}
