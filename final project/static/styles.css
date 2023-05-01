@@ -1,0 +1,117 @@
+/* Size for brand */
+nav .navbar-brand
+{
+    font-size: xx-large;
+}
+
+/* Colors for brand */
+nav .navbar-brand .blue
+{
+    color: #537fbe;
+}
+nav .navbar-brand .red
+{
+    color: #ea433b;
+}
+nav .navbar-brand .yellow
+{
+    color: #f5b82e;
+}
+nav .navbar-brand .green
+{
+    color: #2e944b;
+}
+
+.create
+{
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.cancel
+{
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+    background-color: #5C8099;
+    border-color: none;
+    color: #fff;
+}
+
+/* Buttons */
+#button
+{
+    background-color: #0083B6;
+    border-color: #0083B6;
+}
+
+#footer
+{
+    background-color: #5C8099;
+}
+
+#error
+{
+    max-width: 500px;
+    max-height: auto;
+}
+
+#header
+{
+    text-align: left;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+#subtitle
+{
+    background-color: #FFFFFF;
+    color: #0083B6;
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.btn-primary{
+    background-color: #0083B6;
+    border-color: #0083B6;
+}
+
+#button-menu
+{
+    margin-right: 1rem;
+}
+
+#create_form
+{
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#db_table
+{
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+:root{
+    --bs-body-font-family: Montserrat;
+}
+
+#myForm
+{
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+}

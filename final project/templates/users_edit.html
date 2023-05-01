@@ -1,0 +1,85 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Editar Usuario
+{% endblock %}
+
+{% block main %}
+    <nav class="navbar navbar-expand-md navbar-light" id="subtitle">Editar Usuario
+    </nav>
+    {% set count = namespace(value=0) %}
+    {% for user in users %}
+    <form id="create_form" method="post">
+        <div class="row form-group">
+            <label class="col-sm-2 col-form-label">Nombre</label>
+            <div class="col-sm-4">
+                <input name="name" value="{{ users[count.value].name }}" type="text" autofocus class="form-control">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-2 col-form-label">Celular</label>
+            <div class="col-sm-4">
+                <input name="phone" value="{{ users[count.value].phone }}" type="text" class="form-control">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-2 col-form-label">Email</label>
+            <div class="col-sm-4">
+                <input name="email" value="{{ users[count.value].email }}" type="text" class="form-control">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-2 col-form-label">Banco</label>
+            <div class="col-sm-4">
+                <select class="form-select" name="banco">
+                    <option>Seleccionar</option>
+                        {% set count = namespace(value=0) %}
+                        {% for bank in banks %}
+                            {% if banks[count.value].name == banks[0].name %}
+                                <option selected value="{{ banks[count.value].name }}">{{ banks[count.value]["name"] }}</option>
+                            {% else %}
+                                <option value="{{ banks[count.value].name }}">{{ banks[count.value]["name"] }}</option>
+                            {% endif %}
+                            {% set count.value = count.value + 1 %}
+                        {% endfor %}
+                        {% set count = namespace(value=0) %}
+                </select>
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-2 col-form-label">Nro. Cuenta</label>
+            <div class="col-sm-4">
+                <input name="account" value="{{ users[count.value].bank_account }}" type="text" class="form-control">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-2 col-form-label">Cumpleaños</label>
+            <div class="col-sm-4">
+                <input name="birthday" value="{{ users[count.value].birthday }}" type="date" class="form-control">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-2 col-form-label">Usuario</label>
+            <div class="col-sm-4">
+                <select class="form-select" name="user">
+                    <option selected disabled>{{ users[0].username }}</option>
+                </select>
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-2 col-form-label">Tipo de Usuario</label>
+            <div class="col-sm-4">
+                <select class="form-select" name="user_type">
+                    <option selected disabled>{{ user_types[count.value].name }}</option>
+                </select>
+            </div>
+        </div>
+    <button onclick="showAlert()" class="btn btn-primary col-sm-2 col-form-label" type="submit">Editar</button>
+    </form>
+    {% set count.value = count.value + 1 %}
+    {% endfor %}
+    <a href="https://nico92-pe-code50-94309353-97wx995w42x759-5000.preview.app.github.dev/usuarios">
+        <button class="btn col-sm-2 col-form-label cancel" id="cancelar">Cancelar</button>
+    </a>
+
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Usuarios
+{% endblock %}
+
+{% block main %}
+    <nav class="navbar navbar-expand-md navbar-light" id="subtitle">Usuarios
+        <ul class="navbar-nav ms-auto mt-2">
+            <form action="/usuarios" method="post">
+                <button class="btn btn-primary" type="submit">+ Agregar Usuario</button>
+            </form>
+        </ul>
+    </nav>
+    <div id="db_table">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="text-start">Nombre</th>
+                    <th class="text-start">Celular</th>
+                    <th class="text-end">Email</th>
+                    <th class="text-end">Banco</th>
+                    <th class="text-end">Cuenta Bancaria</th>
+                    <th class="text-end">Cumpleaños</th>
+                    <th class="text-end">Editar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% set count = namespace(value=0) %}
+                {% for user in users %}
+                    <tr>
+                        <td class="text-start">{{ users[count.value]["name"] }}</td>
+                        <td class="text-start">{{ users[count.value]["phone"] }}</td>
+                        <td class="text-end">{{ users[count.value]["email"] }}</td>
+                        <td class="text-end">{{ users[count.value]["bank"] }}</td>
+                        <td class="text-end">{{ users[count.value]["bank_account"] }}</td>
+                        <td class="text-end">{{ users[count.value]["birthday"] }}</td>
+                        <td class="text-end">
+                            <a href="https://nico92-pe-code50-94309353-97wx995w42x759-5000.preview.app.github.dev/users_edit/{{ users[count.value].id }}">
+                                <img type="imgage" id="{{ users[count.value].name }}" src="/static/edit.png"></img>
+                            </a>
+                        </td>
+                    </tr>
+                    {% set count.value = count.value + 1 %}
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

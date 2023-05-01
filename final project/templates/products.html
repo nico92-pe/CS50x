@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Productos
+{% endblock %}
+
+{% block main %}
+
+    <nav class="navbar navbar-expand-md navbar-light" id="subtitle">Productos
+        {% if session["user_type"] != 3 %}
+            <ul class="navbar-nav ms-auto mt-2">
+                <form action="/productos" method="post">
+                    <button class="btn btn-primary" type="submit">+ Agregar Productos</button>
+                </form>
+            </ul>
+        {% endif %}
+    </nav>
+    <div id="db_table">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="text-start">#</th>
+                    <th class="text-start">Producto</th>
+                    <th class="text-start">Código</th>
+                    <th class="text-end">Precio Minorista</th>
+                    <th class="text-end">Precio Mayorista</th>
+                    {% if session["user_type"] == 1 or session["user_type"] == 2 %}
+                        <th class="text-end">Editar</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% set count = namespace(value=0) %}
+                {% for product in products %}
+                <tr>
+                    <td class="text-start">{{ products[count.value].id }}</td>
+                    <td class="text-start">{{ products[count.value].name }}</td>
+                    <td class="text-start">{{ products[count.value].code }}</td>
+                    <td class="text-end">{{ products[count.value]["price_min"] }}</td>
+                    <td class="text-end">{{ products[count.value]["price_max"] }}</td>
+                    {% if session["user_type"] == 1 or session["user_type"] == 2 %}
+                        <td class="text-end">
+                            <a href="https://nico92-pe-code50-94309353-97wx995w42x759-5000.preview.app.github.dev/products_edit/{{ products[count.value].id }}">
+                                <img type="imgage" id="{{ products[count.value].name }}" src="/static/edit.png"></img>
+                            </a>
+                        </td>
+                    {% endif %}
+                </tr>
+                {% set count.value = count.value + 1 %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+
+        function alertName(event)
+        {
+            var trigger = event.srcElement;
+            alert('you clicked on ' + trigger.innerHTML);
+        }
+
+    </script>
+{% endblock %}

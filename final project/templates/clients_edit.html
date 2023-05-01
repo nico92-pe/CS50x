@@ -1,0 +1,132 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Editar Cliente
+{% endblock %}
+
+{% block main %}
+    <nav class="navbar navbar-expand-md navbar-light" id="subtitle">Editar Cliente
+    </nav>
+    {% set count = namespace(value=0) %}
+    {% for client in clients %}
+    <form id="create_form" method="post">
+        <div class="row form-group">
+            <label class="col-sm-2 col-form-label">RUC</label>
+            <div class="col-sm-4">
+                <input name="ruc" value="{{ clients[count.value].ruc }}" type="text" autofocus class="form-control">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-2 col-form-label">Razón Social</label>
+            <div class="col-sm-4">
+                <input name="razon_social" value="{{ clients[count.value].razon_social }}" type="text" class="form-control">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-2 col-form-label">Nombre Comercial</label>
+            <div class="col-sm-4">
+                <input name="name" value="{{ clients[count.value].name }}" type="text" class="form-control">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-2 col-form-label">Vendedor</label>
+            <div class="col-sm-4">
+                <select class="form-select" name="salesman">
+                    {% if session["user_type"] == 3 %}
+                        <option selected>{{ session["sales_name"] }}</option>
+                    {% else %}
+                        <option>Seleccionar</option>
+                            {% set count = namespace(value=0) %}
+                                {% for salesman in salesmen %}
+                                        {% if salesmen[count.value].name == salesman_client[0].salesman %}
+                                            <option selected value="{{ salesmen[count.value].name }}">{{ salesmen[count.value]["name"] }}</option>
+                                        {% else %}
+                                            <option value="{{ salesmen[count.value].name }}">{{ salesmen[count.value]["name"] }}</option>
+                                        {% endif %}
+                                        {% set count.value = count.value + 1 %}
+                                {% endfor %}
+                            {% set count = namespace(value=0) %}
+                    {% endif %}
+                    </select>
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-2 col-form-label">Contacto 1</label>
+            <div class="col-sm-4">
+                <input name="contact1_name" value="{{ clients[count.value].contact1_name }}" type="text" class="form-control">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-2 col-form-label">Teléfono Contacto 1</label>
+            <div class="col-sm-4">
+                <input name="contact1_phone" value="{{ clients[count.value].contact1_phone }}" type="text" class="form-control">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-2 col-form-label">Contacto 2</label>
+            <div class="col-sm-4">
+                <input name="contact2_name" value="{{ clients[count.value].contact2_name }}" type="text" class="form-control">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-2 col-form-label">Teléfono Contacto 2</label>
+            <div class="col-sm-4">
+                <input name="contact2_phone" value="{{ clients[count.value].contact2_phone }}" type="text" class="form-control">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-2 col-form-label">Correo</label>
+            <div class="col-sm-4">
+                <input name="email" value="{{ clients[count.value].email }}" type="text" class="form-control">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-2 col-form-label">Dirección</label>
+            <div class="col-sm-4">
+                <input name="address" value="{{ clients[count.value].address }}" type="text" class="form-control">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-2 col-form-label">Distrito</label>
+            <div class="col-sm-4">
+                <select class="form-select" name="district">
+                    <option>Seleccionar</option>
+                        {% set count = namespace(value=0) %}
+                            {% for district in districts %}
+                                {% if districts[count.value].name == clients[0].district %}
+                                    <option selected value="{{ districts[count.value].name }}">{{ districts[count.value]["name"] }}</option>
+                                {% else %}
+                                    <option value="{{ districts[count.value].name }}">{{ districts[count.value]["name"] }}</option>
+                                {% endif %}
+                                {% set count.value = count.value + 1 %}
+                            {% endfor %}
+                        {% set count = namespace(value=0) %}
+                </select>
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-2 col-form-label">Provincia</label>
+            <div class="col-sm-4">
+                <select class="form-select" name="province">
+                    <option>Seleccionar</option>
+                        {% set count = namespace(value=0) %}
+                        {% for province in provinces %}
+                            {% if provinces[count.value].name == clients[0].province %}
+                                <option selected value="{{ provinces[count.value].name }}">{{ provinces[count.value]["name"] }}</option>
+                            {% else %}
+                                <option value="{{ provinces[count.value].name }}">{{ provinces[count.value]["name"] }}</option>
+                            {% endif %}
+                            {% set count.value = count.value + 1 %}
+                        {% endfor %}
+                </select>
+            </div>
+        </div>
+    <button onclick="showAlert()" class="btn btn-primary col-sm-2 col-form-label" type="submit">Editar</button>
+    </form>
+    {% set count.value = count.value + 1 %}
+    {% endfor %}
+    <a href="https://nico92-pe-code50-94309353-97wx995w42x759-5000.preview.app.github.dev/clientes">
+        <button class="btn col-sm-2 col-form-label cancel" id="cancelar">Cancelar</button>
+    </a>
+
+{% endblock %}

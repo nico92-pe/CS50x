@@ -1,0 +1,114 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Crear Cliente
+{% endblock %}
+
+{% block main %}
+    <nav class="navbar navbar-expand-md navbar-light" id="subtitle">Crear Cliente
+    </nav>
+    <form id="create_form" method="post">
+        <div class="row form-group">
+            <label class="col-sm-2 col-form-label">RUC</label>
+            <div class="col-sm-4">
+                <input name="ruc" type="text" autofocus class="form-control">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-2 col-form-label">Razón Social</label>
+            <div class="col-sm-4">
+                <input name="razon_social" type="text" class="form-control">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-2 col-form-label">Nombre Comercial</label>
+            <div class="col-sm-4">
+                <input name="name" type="text" class="form-control">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-2 col-form-label">Vendedor</label>
+            <div class="col-sm-4">
+                <select class="form-select" name="salesman">
+                    {% if session["user_type"] == 3 %}
+                        <option selected>{{ session["sales_name"] }}</option>
+                    {% else %}
+                        <option disabled selected>Seleccionar</option>
+                            {% set count = namespace(value=0) %}
+                            {% for salesman in salesmen %}
+                                <option value="{{ salesmen[count.value].username }}">{{ salesmen[count.value]["name"] }}</option>
+                                {% set count.value = count.value + 1 %}
+                            {% endfor %}
+                    {% endif %}
+                </select>
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-2 col-form-label">Contacto 1</label>
+            <div class="col-sm-4">
+                <input name="contact1_name" type="text" class="form-control">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-2 col-form-label">Teléfono Contacto 1</label>
+            <div class="col-sm-4">
+                <input name="contact1_phone" type="text" class="form-control">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-2 col-form-label">Contacto 2</label>
+            <div class="col-sm-4">
+                <input name="contact2_name" type="text" class="form-control">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-2 col-form-label">Teléfono Contacto 2</label>
+            <div class="col-sm-4">
+                <input name="contact2_phone" type="text" class="form-control">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-2 col-form-label">Correo</label>
+            <div class="col-sm-4">
+                <input name="email" type="text" class="form-control">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-2 col-form-label">Dirección</label>
+            <div class="col-sm-4">
+                <input name="address" type="text" class="form-control">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-2 col-form-label">Distrito</label>
+            <div class="col-sm-4">
+                <select class="form-select" name="district">
+                    <option disabled selected>Seleccionar</option>
+                        {% set count = namespace(value=0) %}
+                        {% for district in districts %}
+                            <option value="{{ districts[count.value].name }}">{{ districts[count.value]["name"] }}</option>
+                            {% set count.value = count.value + 1 %}
+                        {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-2 col-form-label">Provincia</label>
+            <div class="col-sm-4">
+                <select class="form-select" name="province">
+                    <option disabled selected>Seleccionar</option>
+                        {% set count = namespace(value=0) %}
+                        {% for province in provinces %}
+                            <option value="{{ provinces[count.value].name }}">{{ provinces[count.value]["name"] }}</option>
+                            {% set count.value = count.value + 1 %}
+                        {% endfor %}
+                </select>
+            </div>
+        </div>
+    <button onclick="showAlert()" class="btn btn-primary col-sm-2 col-form-label" type="submit">Crear</button>
+    </form>
+    <a href="https://nico92-pe-code50-94309353-97wx995w42x759-5000.preview.app.github.dev/clientes">
+        <button class="btn col-sm-2 col-form-label cancel" id="guardar">Cancelar</button>
+    </a>
+
+{% endblock %}

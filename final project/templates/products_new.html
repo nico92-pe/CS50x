@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Crear Producto
+{% endblock %}
+
+{% block main %}
+
+    <nav class="navbar navbar-expand-md navbar-light" id="subtitle">Crear Producto
+    </nav>
+    <form id="create_form" method="post">
+        <div class="row form-group">
+            <label class="col-sm-2 col-form-label">Producto</label>
+            <div class="col-sm-4">
+                <input name="name" type="text" autofocus class="form-control">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-2 col-form-label">Código</label>
+            <div class="col-sm-4">
+                <input name="code" type="text" class="form-control">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-2 col-form-label">Precio Minorista</label>
+            <div class="col-sm-4">
+                <input name="price_max" type="text" class="form-control">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-2 col-form-label">Precio Mayorista</label>
+            <div class="col-sm-4">
+                <input name="price_min" type="text" class="form-control">
+            </div>
+        </div>
+    <button onclick="showAlert()" class="btn btn-primary col-sm-2 col-form-label create" type="submit" id="guardar">Crear</button>
+    </form>
+    <a href="https://nico92-pe-code50-94309353-97wx995w42x759-5000.preview.app.github.dev/productos">
+        <button class="btn col-sm-2 col-form-label cancel" id="guardar">Cancelar</button>
+    </a>
+
+{% endblock %}

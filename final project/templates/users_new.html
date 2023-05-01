@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Crear Usuario
+{% endblock %}
+
+{% block main %}
+    <nav class="navbar navbar-expand-md navbar-light" id="subtitle">Usuarios
+    </nav>
+    <form id="create_form" method="post">
+        <div class="row form-group">
+            <label class="col-sm-2 col-form-label">Nombre</label>
+            <div class="col-sm-4">
+                <input name="name" type="text" autofocus class="form-control">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-2 col-form-label">Celular</label>
+            <div class="col-sm-4">
+                <input name="phone" type="text" class="form-control">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-2 col-form-label">Email</label>
+            <div class="col-sm-4">
+                <input name="email" type="text" class="form-control">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-2 col-form-label">Banco</label>
+            <div class="col-sm-4">
+                <select class="form-select" name="banco">
+                    <option disabled selected>Seleccionar</option>
+                        {% set count = namespace(value=0) %}
+                        {% for bank in banks %}
+                            <option value="{{ banks[count.value].name }}">{{ banks[count.value]["name"] }}</option>
+                            {% set count.value = count.value + 1 %}
+                        {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-2 col-form-label">Nro. Cuenta</label>
+            <div class="col-sm-4">
+                <input name="account" type="text" class="form-control">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-2 col-form-label">Cumpleaños</label>
+            <div class="col-sm-4">
+                <input name="birthday" type="date" class="form-control">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-2 col-form-label">Usuario</label>
+            <div class="col-sm-4">
+                <input name="user" type="text" class="form-control">
+            </div>
+        </div>
+        <div class="row form-group">
+            <label class="col-sm-2 col-form-label">Tipo de Usuario</label>
+            <div class="col-sm-4">
+                <select class="form-select" name="user_type">
+                    <option disabled selected>Seleccionar</option>
+                        {% set count = namespace(value=0) %}
+                        {% for user in user_types %}
+                            <option value="{{ user_types[count.value].name }}">{{ user_types[count.value]["name"] }}</option>
+                            {% set count.value = count.value + 1 %}
+                        {% endfor %}
+                </select>
+            </div>
+        </div>
+    <button onclick="showAlert()" class="btn btn-primary col-sm-2 col-form-label" type="submit">Crear</button>
+    </form>
+    <a href="https://nico92-pe-code50-94309353-97wx995w42x759-5000.preview.app.github.dev/usuarios">
+        <button class="btn col-sm-2 col-form-label cancel" id="guardar">Cancelar</button>
+    </a>
+
+{% endblock %}

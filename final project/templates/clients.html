@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Clientes
+{% endblock %}
+
+{% block main %}
+    <nav class="navbar navbar-expand-md navbar-light" id="subtitle">Clientes
+        <ul class="navbar-nav ms-auto mt-2">
+            <form action="/clientes" method="post">
+                <button class="btn btn-primary" type="submit">+ Agregar Cliente</button>
+            </form>
+        </ul>
+    </nav>
+    <div id="db_table">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="text-start">Nombre Comercial</th>
+                    <th class="text-start">Contacto 1</th>
+                    <th class="text-end">Celular 1</th>
+                    <th class="text-end">Dirección</th>
+                    <th class="text-end">Distrito</th>
+                    <th class="text-end">Vendedor</th>
+                    <th class="text-end">Editar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% set count = namespace(value=0) %}
+                {% for client in clients %}
+                    {% if session["user_type"] == 3 %}
+                        {% if session["user_id"] == clients[count.value]["salesman_id"] %}
+                            <tr>
+                                <td class="text-start">{{ clients[count.value]["name"] }}</td>
+                                <td class="text-start">{{ clients[count.value]["contact1_name"] }}</td>
+                                <td class="text-end">{{ clients[count.value]["contact1_phone"] }}</td>
+                                <td class="text-end">{{ clients[count.value]["address"] }}</td>
+                                <td class="text-end">{{ clients[count.value]["district"] }}</td>
+                                <td class="text-end">{{ clients[count.value]["salesman"] }}</td>
+                                <td class="text-end">
+                                    <a href="https://nico92-pe-code50-94309353-97wx995w42x759-5000.preview.app.github.dev/clients_edit/{{ clients[count.value].id }}">
+                                        <img type="imgage" id="{{ clients[count.value].name }}" src="/static/edit.png"></img>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endif %}
+                    {% else %}
+                        <tr>
+                            <td class="text-start">{{ clients[count.value]["name"] }}</td>
+                            <td class="text-start">{{ clients[count.value]["contact1_name"] }}</td>
+                            <td class="text-end">{{ clients[count.value]["contact1_phone"] }}</td>
+                            <td class="text-end">{{ clients[count.value]["address"] }}</td>
+                            <td class="text-end">{{ clients[count.value]["district"] }}</td>
+                            <td class="text-end">{{ clients[count.value]["salesman"] }}</td>
+                            <td class="text-end">
+                                <a href="https://nico92-pe-code50-94309353-97wx995w42x759-5000.preview.app.github.dev/clients_edit/{{ clients[count.value].id }}">
+                                    <img type="imgage" id="{{ clients[count.value].name }}" src="/static/edit.png"></img>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endif%}
+                    {% set count.value = count.value + 1 %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
